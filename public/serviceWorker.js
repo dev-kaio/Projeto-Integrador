@@ -1,7 +1,7 @@
 const CACHE_NAME = "brocas-cache-v1";
 const urlsToCache = [
   "/", // raiz serve index.html
-  "/pages/index.html",
+  "/z/index.html",
   "/pages/brocas.html",
   "/pages/config.html",
   "/pages/maquina.html",
