@@ -1,0 +1,26 @@
+{
+  "name": "ToolSave",
+  "short_name": "ToolSave",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#10295a",
+  "theme_color": "#10295a",
+  "description": "Gerenciador de gasto de brocas",
+  "icons": [
+    {
+      "src": "/assets/img/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/assets/img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/logo_quadrada.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

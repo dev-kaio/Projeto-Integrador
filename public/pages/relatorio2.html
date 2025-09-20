@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráficos - ToolSave</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.ico" />
+    <link rel="stylesheet" href="/css/relatorio.css" />
+    <link rel="manifest" href="../manifest.json" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/register-sw.js"></script>
+  </head>
+  <body>
+    <form class="back-button" action="menu.html">
+      <button
+        class="back-button2"
+        href="#"
+        onclick="history.back(); return false;"
+      >
+        &lt;
+      </button>
+    </form>
+    <div class="container">
+      <header>
+        <h1>Relatório de Uso de Brocas</h1>
+      </header>
+      <div class="filters">
+        <div class="filter-group">
+          <div class="filter">
+            <label for="month">Mês:</label>
+            <select id="month">
+              <option value="" selected>Selecione um mês</option>
+              <option value="janeiro">Janeiro</option>
+              <option value="fevereiro">Fevereiro</option>
+              <option value="março">Março</option>
+              <option value="abril">Abril</option>
+              <option value="maio">Maio</option>
+              <option value="junho">Junho</option>
+              <option value="julho">Julho</option>
+              <option value="agosto">Agosto</option>
+              <option value="setembro">Setembro</option>
+              <option value="outubro">Outubro</option>
+              <option value="novembro">Novembro</option>
+              <option value="dezembro">Dezembro</option>
+            </select>
+          </div>
+          <div class="filter">
+            <label for="year">Ano:</label>
+            <select id="year">
+              <option value="2025">2025</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter">
+          <label for="range">Intervalo:</label>
+          <input type="month" id="start-month" />
+          <span>até</span>
+          <input type="month" id="end-month" />
+        </div>
+      </div>
+      <section class="summary">
+        <h2>Utilização de Brocas</h2>
+      </section>
+      <section class="charts">
+        <div class="chart">
+          <canvas id="usage-chart"></canvas>
+        </div>
+        <div class="chart">
+          <canvas id="sharpening-chart"></canvas>
+        </div>
+      </section>
+      <section class="details">
+        <h2>Detalhes</h2>
+        <div class="filter">
+          <label for="details-select">Selecione a informação:</label>
+          <select id="details-select">
+            <option value="brocas-gastas">Brocas Gastas</option>
+            <option value="afiacoes">Afiações</option>
+          </select>
+        </div>
+        <div id="details-list">
+          <!-- lista de detalhes vem por meio disso-->
+        </div>
+      </section>
+      <div class="buttons">
+        <button class="export-button" id="export-btn">
+          Exportar como tabela
+          <img
+            src="https://img.icons8.com/ios-filled/50/ffffff/ms-excel.png"
+            alt="Excel Icon"
+            width="20"
+          />
+        </button>
+      </div>
+    </div>
+    <script src="../js/grafico.js" type="module"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  </body>
+</html>

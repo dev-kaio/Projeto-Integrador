@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brocas - ToolSave</title>
+    <link rel="stylesheet" href="../css/brocas.css" />
+    <link rel="manifest" href="../manifest.json" />
+    <script src="../js/register-sw.js"></script>
+  </head>
+  <body>
+    <div class="centralize">
+      <div class="brocas-container">
+        <form class="back-button" action="menu.html">
+          <button class="back-button">&lt;</button>
+        </form>
+        <header>
+          <div class="blue-bar">
+            <h1>Brocas</h1>
+          </div>
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Digite o código ou tipo da broca"
+              id="brocaSearchInput"
+            />
+            <div id="suggestions" class="suggestions-list"></div>
+            <a class="add-button modal-trigger" data-target="modal2">Gestão</a>
+          </div>
+        </header>
+        <section class="info-section">
+          <!-- VERIFICAR POSTERIORMENTE O BACKEND -->
+          <h2>Informações de Estoque</h2>
+          <div class="stock-info">
+            <div class="stock-item">
+              <span>Estoque geral</span>
+              <span></span>
+            </div>
+            <div class="stock-item">
+              <span>Brocas novas</span>
+              <span></span>
+            </div>
+            <div class="stock-item">
+              <span>Brocas usadas</span>
+              <span></span>
+            </div>
+            <div class="stock-item">
+              <span>Brocas em afiação</span>
+              <span></span>
+            </div>
+          </div>
+          <a
+            href="#modal1"
+            class="sharpen-button modal-trigger"
+            data-target="modal1"
+            >Afiação</a
+          >
+        </section>
+        <section class="drill-list">
+          <h2>Lista de Brocas</h2>
+          <ul></ul>
+        </section>
+      </div>
+    </div>
+    <div id="popup-info" class="popup">
+      <div class="popup-content">
+        <span class="close">&times;</span>
+        <h2>Informações da broca <span id="broca-id"></span></h2>
+        <div class="info-pair">
+          <span class="info-label">Diâmetro:</span
+          ><span id="broca-diametro"></span>
+        </div>
+        <div class="info-pair">
+          <span class="info-label">Comprimento:</span
+          ><span id="broca-comprimento"></span>
+        </div>
+        <div class="info-pair">
+          <span class="info-label">Adicionada em:</span
+          ><span id="broca-data"></span>
+        </div>
+        <div class="info-pair">
+          <span class="info-label">Número de Afiações:</span
+          ><span id="broca-numeroAfiacoes"></span>
+        </div>
+        <div class="info-pair">
+          <span class="info-label">Tipo:</span><span id="broca-tipo"></span>
+        </div>
+        <div class="info-pair">
+          <span class="info-label">Última Alteração:</span
+          ><span id="broca-dataEdicao"></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <a href="#" class="close">×</a>
+        <h2>Selecione as Brocas</h2>
+        <div class="search-container">
+          <input
+            type="text"
+            placeholder="Digite o código ou tipo da broca"
+            id="brocaAfiacaoSearchInput"
+          />
+        </div>
+        <ul></ul>
+        <form action="maquina.html" id="afiacaoForm">
+          <button type="submit" class="ok-button">OK</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal2" class="modal-custom">
+      <div class="modal-content-custom">
+        <a href="#" class="close-custom">×</a>
+        <div class="tab-container-custom">
+          <input type="radio" id="add" name="tab" />
+          <a href="#" class="permanent-green modal-trigger" data-target="modal3"
+            >Adicionar</a
+          >
+          <input type="radio" id="edit" name="tab" />
+          <label for="edit">Editar</label>
+          <input type="radio" id="delete" name="tab" />
+          <label for="delete">Deletar</label>
+        </div>
+        <!-- <div class="search-container-custom">
+          <input
+            type="text"
+            placeholder="Digite o código ou o tipo"
+            id="searchInputGestao"
+          />
+        </div> -->
+        <ul class="checkbox-list"></ul>
+      </div>
+    </div>
+
+    <div id="modal3" class="modal-custom3">
+      <div class="modal-content-custom3">
+        <a href="#" class="close-custom3">×</a>
+        <h2>Adicionar Nova Broca</h2>
+        <form id="adicionarBrocaForm">
+          <!-- <div class="input-container-inline-custom">
+            <div class="input-item-custom id-input">
+              <label for="id">ID:</label>
+              <input
+                type="text"
+                id="id"
+                name="id"
+                placeholder="ID"
+                maxlength="4"
+              />
+            </div>
+            <div class="input-item-custom quantity-input">
+              <label for="quantity">Quantidade:</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                value="1"
+                min="1"
+                class="small-quantity"
+              />
+            </div>
+          </div> -->
+          <label for="diameter">Diâmetro:</label>
+          <div class="input-container-custom">
+            <input
+              type="text"
+              id="diameter"
+              name="diameter"
+              placeholder="Digite o diâmetro"
+            />
+          </div>
+          <label for="length">Comprimento:</label>
+          <div class="input-container-custom">
+            <input
+              type="text"
+              id="length"
+              name="length"
+              placeholder="Digite o comprimento"
+            />
+          </div>
+          <!-- <div class="input-container-inline-custom">
+            <div class="input-item-custom sucessor-id-input">
+              <label for="IDsucessor"
+                >ID Sucessor:
+                <span class="tooltip"
+                  >?<span class="tooltiptext"
+                    >O ID Sucessor é o novo ID após alterações no comprimento da
+                    broca.</span
+                  ></span
+                >
+              </label>
+              <input
+                type="text"
+                id="IDsucessor"
+                name="IDSucessor"
+                placeholder="Digite o ID Sucessor"
+                maxlength="4"
+              />
+            </div>
+            <div class="input-item-custom sucessor-length-input">
+              <label for="successor-length">Comprimento Sucessor:</label>
+              <input
+                type="text"
+                id="successor-length"
+                name="successor-length"
+                placeholder="Digite o comprimento"
+              />
+            </div>
+          </div> -->
+          <label for="type">Tipo de Broca:</label>
+          <select id="type" name="type">
+            <option value="" disabled selected>
+              Selecione o tipo de broca
+            </option>
+            <option value="Brocas MD (metal duro)">
+              Brocas MD (metal duro)
+            </option>
+            <option value="Brocas de centro">Brocas de centro</option>
+            <option value="Fresas de topo">Fresas de topo</option>
+            <option value="Brocas intercambiáveis">
+              Brocas intercambiáveis
+            </option>
+          </select>
+          <button type="submit" class="submit-button-custom">Adicionar</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal4" class="modal-custom4">
+      <div class="modal-content-custom3">
+        <a href="#" class="close-custom4">×</a>
+        <h2>Editar Broca</h2>
+        <form id="editarBrocaForm">
+          <input type="hidden" id="edit-original-id" />
+          <!-- <div class="input-container-inline-custom">
+            <div class="input-item-custom id-input">
+              <label for="edit-id">ID:</label>
+              <input type="text" id="edit-id" name="id" maxlength="4" />
+            </div>
+            <div class="input-item-custom quantity-input">
+              <label for="edit-quantity">Quantidade:</label>
+              <input type="number" id="edit-quantity" name="quantity" min="1" />
+            </div>
+          </div> -->
+          <label for="edit-diameter">Diâmetro:</label>
+          <input type="text" id="edit-diameter" name="diameter" />
+
+          <label for="edit-length">Comprimento:</label>
+          <input type="text" id="edit-length" name="length" />
+
+          <!-- <label for="edit-IDsucessor">ID Sucessor:</label>
+          <input
+            type="text"
+            id="edit-IDsucessor"
+            name="IDSucessor"
+            maxlength="4"
+          />
+
+          <label for="edit-successor-length">Comprimento Sucessor:</label>
+          <input
+            type="text"
+            id="edit-successor-length"
+            name="successor-length"
+          /> -->
+
+          <label for="edit-type">Tipo de Broca:</label>
+          <select id="edit-type" name="type">
+            <option value="Brocas MD (metal duro)">
+              Brocas MD (metal duro)
+            </option>
+            <option value="Brocas de centro">Brocas de centro</option>
+            <option value="Fresas de topo">Fresas de topo</option>
+            <option value="Brocas intercambiáveis">
+              Brocas intercambiáveis
+            </option>
+          </select>
+
+          <button type="submit" class="submit-button-custom">
+            Salvar Alterações
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="modalDelete" class="modal-custom-delete">
+      <div class="modal-content-delete">
+        <a href="#" class="close-delete">×</a>
+        <h2>Deletar Broca</h2>
+        <p>Clique em uma broca para deletá-la permanentemente:</p>
+        <ul class="delete-broca-list"></ul>
+      </div>
+    </div>
+
+    <script src="../js/brocas-front.js" type="module"></script>
+  </body>
+</html>

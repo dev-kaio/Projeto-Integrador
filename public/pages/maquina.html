@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Máquina - ToolSave</title>
+    <link rel="stylesheet" href="../css/maquina.css" />
+    <link rel="manifest" href="../manifest.json" />
+    <script src="../js/register-sw.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <form class="back-button" action="brocas.html">
+        <button class="back-button">&lt;</button>
+      </form>
+      <header>
+        <h1>Especificações Broca nº X</h1>
+      </header>
+      <section class="instructions">
+        <p id="atualizacao">Posicione a broca na máquina e inicie o processo</p>
+        <div class="maquina-container">
+          <p class="maquina">AGUARDANDO PARTIDA DA MÁQUINA</p>
+          <img src="../assets/img/gear.gif" alt="preview" class="gear" />
+        </div>
+        <div class="photo-placeholder">
+          <video id="cameraFeed" width="90%" autoplay></video>
+        </div>
+        <button id="tirarFotoBtn" style="border-radius: 20px; padding: 10px;">Iniciar Medição</button>
+      </section>
+
+      <section class="details">
+        <div class="detail-item">
+          <label for="comprimento">Comprimento</label>
+          <span id="comprimento">X</span>
+        </div>
+        <div class="detail-item">
+          <label for="diametro">Diâmetro</label>
+          <span id="diametro">X</span>
+        </div>
+        <div class="detail-item">
+          <label for="codigo">ID da Broca</label>
+          <span id="codigo">X</span>
+        </div>
+        <div class="detail-item">
+          <label for="afiacoes">Quantidade de afiações</label>
+          <span id="afiacoes">X</span>
+        </div>
+      </section>
+      <div class="buttons" style="display: flex; align-items: center; justify-content: center;">
+          <button class="check-button" id="check-button" href="#" style="border-radius: 20px;">Concluir Processo</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="../js/maquina.js"></script>
+</html>

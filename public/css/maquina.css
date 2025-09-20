@@ -1,0 +1,136 @@
+:root {
+  --primary-color: rgba(35, 179, 74);
+  --secondary-color: rgba(35, 179, 74);
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --font-family: "Poppins", sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+header {
+  text-align: center;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 10px 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.instructions {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.photo-placeholder {
+  background-color: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.edit-button,
+.check-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-button {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.edit-button:hover {
+  background-color: #10295a;
+}
+
+.check-button {
+  background-color: var(--secondary-color);
+  color: #ffffff;
+}
+
+.check-button:hover {
+  background-color: rgba(0, 159, 227);
+}
+
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  font-size: 50px;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-weight: 500;
+}
+
+.rodape {
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.maquina-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.maquina {
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.gear {
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+}
+
+#cameraFeed {
+  transform: scaleX(-1);
+}

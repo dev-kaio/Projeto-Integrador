@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relatório - ToolSave</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.ico" />
+    <link rel="stylesheet" href="../css/relatorio.css" />
+    <link rel="manifest" href="../manifest.json" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/register-sw.js"></script>
+  </head>
+  <body>
+    <form class="back-button" action="menu.html">
+      <button class="back-button2">&lt;</button>
+    </form>
+    <div class="container">
+      <header>
+        <h1>Relatório de Uso de Brocas</h1>
+
+        <a href="relatorio2.html" class="btn">Gráficos</a>
+      </header>
+      <div style="text-align: center; margin-bottom: 20px; margin-top: 20px;">
+        <label for="searchBroca">Buscar Broca por ID:</label>
+        <input
+          type="text"
+          id="searchBroca"
+          class="inputSearch"
+          placeholder="ID broca"
+        />
+        <button id="searchBtn" class="searchBtn">Buscar</button>
+      </div>
+      <h1 style="text-align: center" id="brocaID"></h1>
+      <div class="bf" id="bf" style="display: none;">
+        <div class="antes">
+          <h4>Antes da Afiação</h4>
+          <img class="img-antes" id="img-antes" src="" alt="" />
+          <section class="details">
+            <div class="detail-item">
+              <label for="comprimento">Comprimento</label>
+              <span id="comprimento">X</span>
+            </div>
+            <div class="detail-item">
+              <label for="diametro">Diâmetro</label>
+              <span id="diametro">X</span>
+            </div>
+            <div class="detail-item">
+              <label for="afiacoes">Quantidade de afiações</label>
+              <span id="afiacoes">X</span>
+            </div>
+          </section>
+        </div>
+        <div class="depois">
+          <h4>Após Afiação</h4>
+          <img class="img-depois" id="img-depois" src="" alt="" />
+          <section class="details">
+            <div class="detail-item">
+              <label for="comprimento">Comprimento</label>
+              <span id="NovoComprimento">X</span>
+            </div>
+            <div class="detail-item">
+              <label for="diametro">Diâmetro</label>
+              <span id="diametro">X</span>
+            </div>
+            <div class="detail-item">
+              <label for="afiacoes">Quantidade de afiações</label>
+              <span id="afiacoes">X</span>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script src="../js/relatorio.js" type="module"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  </body>
+</html>

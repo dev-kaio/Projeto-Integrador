@@ -1,0 +1,1040 @@
+/* Estilos gerais */
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+/* Adicionando estilos dos botões */
+.add-button,
+.add-button-custom,
+.submit-button-custom {
+  padding: 10px 20px;
+  background-color: rgba(35, 179, 74);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
+}
+
+.sharpen-button {
+  padding: 10px 20px;
+  background-color: rgba(35, 179, 74);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  width: calc(100% - 40px); /* Subtrai o padding do container */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-button:hover,
+.add-button-custom:hover,
+.sharpen-button:hover,
+.submit-button-custom:hover {
+  background-color: rgba(0, 159, 227);
+}
+
+/* Restante dos seus estilos */
+.brocas-container {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 2%;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.rodape {
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.blue-bar {
+  width: 100%;
+  height: 50px;
+  background-color: rgba(35, 179, 74);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blue-bar h1 {
+  color: #fff;
+  margin: 0;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.search-container input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1; /* Garantir que o input esteja acima das sugestões */
+}
+
+.search-container .search-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+}
+
+header input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: rgba(35, 179, 74);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.add-button:hover {
+  background-color: rgba(0, 159, 227);
+}
+
+.info-section {
+  margin-bottom: 20px;
+}
+
+.info-section h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.stock-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 100%;
+}
+
+.stock-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+  font-weight: normal;
+}
+
+.sharpen-button {
+  padding: 10px 20px;
+  background-color: rgba(35, 179, 74);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sharpen-button:hover {
+  background-color: rgba(0, 159, 227);
+}
+
+.drill-list h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.drill-list ul {
+  list-style: none; /* Remove os marcadores */
+  padding: 0;
+}
+
+.drill-list li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ddd; /* Adiciona borda */
+  margin-bottom: 5px; /* Espaçamento entre os itens */
+  border-radius: 5px; /* Bordas arredondadas */
+}
+
+.back-button {
+  position: absolute; /* posicionamento absoluto */
+  top: 10px; /* margem superior */
+  left: 10px; /* margem esquerda */
+  background: none; /* remove o fundo padrão */
+  border: none; /* remove a borda padrão */
+  font-size: 50px; /* tamanho da fonte */
+  cursor: pointer; /* indica que o botão é clicável */
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  z-index: 10;
+}
+
+.modal,
+.modal-custom,
+.modal-custom3,
+.modal-custom4,
+.modal-custom-delete {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com opacidade */
+  transition: opacity 0.3s ease; /* Transição suave */
+}
+
+.modal:target,
+.modal-custom:target,
+.modal-custom3:target,
+.modal-custom4:target,
+.modal-custom-delete:target {
+  display: block;
+  opacity: 1;
+}
+
+.modal-content,
+.modal-content-delete {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: zoom 0.3s ease; /* Animação de zoom */
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ok-button {
+  padding: 10px 20px;
+  background-color: #28a745; /* Cor verde para o botão OK */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+}
+
+.ok-button:hover {
+  background-color: #218838; /* Cor verde mais escura ao passar o mouse */
+}
+
+.back-button:hover {
+  color: #0053a0;
+}
+
+@media (max-width: 600px) {
+  .brocas-container {
+    padding: 10px;
+  }
+  .search-container {
+    flex-direction: column;
+  }
+  .add-button {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+}
+
+/* Estilos para listas no modal */
+.modal-content ul,
+.modal-content-delete ul {
+  list-style: none; /* Remove os marcadores */
+  padding: 0;
+}
+
+.modal-content li,
+.modal-content-delete li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ddd; /* Adiciona borda */
+  margin-bottom: 5px; /* Espaçamento entre os itens */
+  border-radius: 5px; /* Bordas arredondadas */
+  display: flex;
+  align-items: center;
+}
+
+.modal-content li input[type="checkbox"] {
+  margin-right: 10px; /* Espaçamento entre o checkbox e o texto */
+  width: 15px; /* Largura da checkbox */
+  height: 15px; /* Altura da checkbox */
+  transform: scale(1.5); /* Aumenta a escala da checkbox */
+}
+
+.modal-content-custom {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: zoom 0.3s ease; /* Animação de zoom */
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.close-custom {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.close-custom:hover,
+.close-custom:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tab-container-custom {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.tab-container-custom input[type="radio"] {
+  display: none;
+}
+
+.tab-container-custom label {
+  padding: 10px 20px;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.tab-container-custom label:hover {
+  background-color: #888;
+}
+
+.permanent-green {
+  padding: 10px 20px;
+  background-color: #28a745; /* Cor verde para a opção Adicionar */
+  color: white;
+  border: 1px solid #28a745; /* Borda verde */
+  display: inline-block; /* Garante que o link se comporte como um botão */
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.permanent-green:hover {
+  background-color: #218838; /* Cor verde mais escura ao passar o mouse */
+}
+
+.search-container-custom {
+  display: flex;
+  align-items: center;
+}
+
+.search-container-custom input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilos para listas no modal */
+.modal-content-custom ul {
+  list-style: none; /* Remove os marcadores */
+  padding: 0;
+}
+
+.modal-content-custom li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ddd; /* Adiciona borda */
+  margin-bottom: 5px; /* Espaçamento entre os itens */
+  border-radius: 5px; /* Bordas arredondadas */
+  display: flex;
+  align-items: center;
+}
+
+.modal-content-custom li input[type="checkbox"] {
+  margin-right: 10px; /* Espaçamento entre o checkbox e o texto */
+  width: 15px; /* Largura da checkbox */
+  height: 15px; /* Altura da checkbox */
+  transform: scale(1.5); /* Aumenta a escala da checkbox */
+  pointer-events: auto; /* Garantir que os checkboxes possam ser clicados */
+  opacity: 1; /* Garantir que os checkboxes estejam visíveis */
+  display: block; /* Garantir que os checkboxes estejam visíveis */
+}
+
+/* Mostrar checkboxes sempre */
+.checkbox-item {
+  display: inline-block;
+}
+
+/* Botão Gestão azul */
+.add-button-custom {
+  padding: 10px 20px;
+  background-color: rgba(35, 179, 74); /* Cor azul para o botão Gestão */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+  text-decoration: none; /* Remove o sublinhado */
+  display: inline-block; /* Garante que o link se comporte como um botão */
+}
+
+.add-button-custom:hover {
+  background-color: rgba(0, 159, 227); /* Cor azul mais escura ao passar o mouse */
+}
+
+/* Certifique-se de que os estilos do modal estão corretos */
+.modal-custom2 {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com opacidade */
+}
+
+.modal-content-custom2 {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: zoom 0.3s ease;
+}
+
+.modal-custom2:target {
+  display: block;
+  opacity: 1;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.close-custom2 {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.close-custom2:hover,
+.close-custom2:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input[type="text"] {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; /* Ajusta a largura para que todos os campos tenham o mesmo tamanho */
+  box-sizing: border-box; /* Inclui o padding e a borda no cálculo da largura */
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container input[type="text"] {
+  width: 100%; /* Ajusta a largura para acomodar o símbolo */
+  padding-right: 30px; /* Espaço para o símbolo */
+  box-sizing: border-box; /* Inclui o padding e a borda no cálculo da largura */
+}
+
+.input-container .unit {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #555;
+}
+
+select {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #555;
+}
+
+.submit-button2 {
+  padding: 10px 20px;
+  background-color: #28a745; /* Cor verde para o botão */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+}
+
+.submit-button2:hover {
+  background-color: #218838; /* Cor verde mais escura ao passar o mouse */
+}
+
+/* Botão Gestão azul */
+.add-button-custom2 {
+  padding: 10px 20px;
+  background-color: rgba(35, 179, 74); /* Cor azul para o botão Gestão */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+  text-decoration: none; /* Remove o sublinhado */
+  display: inline-block; /* Garante que o link se comporte como um botão */
+}
+
+.add-button-custom2:hover {
+  background-color: rgba(0, 159, 227); /* Cor azul mais escura ao passar o mouse */
+}
+
+.modal-content-custom3 {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: zoom 0.3s ease;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.close-custom3,
+.close-custom4 {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.close-custom3:hover,
+.close-custom3:focus,
+.close-custom4:hover,
+.close-custom4:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.input-container-inline-custom {
+  display: flex;
+  margin-bottom: 15px;
+  padding-right: 45px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.input-item-custom {
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-item-custom.last-child {
+  margin-right: 0;
+}
+
+.input-item-custom.id-input {
+  flex: 0 0 80%;
+}
+
+.input-item-custom.quantity-input {
+  flex: 0 0 20%;
+  margin-left: 0;
+  justify-content: center;
+  width: 125px;
+}
+
+.input-container-custom {
+  margin-bottom: 15px;
+}
+
+.small-quantity {
+  width: 100%;
+  border: 1px solid #cbcbcb;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.submit-button-custom {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+}
+
+.submit-button-custom:hover {
+  background-color: #218838;
+}
+
+.closed {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  .input-container-inline-custom {
+    flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .input-item-custom {
+    margin-right: 0;
+  }
+}
+
+.input-item-custom.sucessor-id-input {
+  flex: 1; /* Ocupa todo o espaço disponível */
+  margin-right: 10px; /* Espaçamento entre os itens */
+}
+
+.input-item-custom.sucessor-length-input {
+  flex: 1; /* Ocupa todo o espaço disponível */
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #ccc; /* Borda cinza clara */
+  border-radius: 50%; /* Forma circular */
+  padding: 2px 8px; /* Espaçamento interno */
+  background-color: #ddd; /* Fundo cinza claro */
+  font-size: 14px; /* Tamanho da fonte */
+  font-weight: bold; /* Deixar o ponto de interrogação em negrito */
+  color: #555; /* Cor do ponto de interrogação */
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Posiciona o tooltip acima do texto */
+  left: 50%;
+  margin-left: -100px; /* Usa margem negativa para centralizar o tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Estilos para o pop-up */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: zoom 0.3s ease;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilos para alinhar texto no pop-up */
+.info-pair {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.info-label {
+  flex: 0 0 40%; /* Ajusta a largura da coluna de chaves */
+  font-weight: bold;
+}
+
+.info-value {
+  flex: 1;
+  text-align: right;
+}
+
+/* Estilo de hover para as barras */
+.drill-list li:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+#ok-button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.submit-button-custom {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block; /* Adicionar display inline-block */
+}
+
+.submit-button-custom:hover {
+  background-color: #218838;
+}
+
+/* Estilo para item selecionado */
+.drill-list li.selected {
+  border: 2px solid #28a745; /* Borda verde para item selecionado */
+}
+
+/* Adicione este estilo ao seu CSS existente */
+.modal-content-custom ul li.selected {
+  border: 2px solid #28a745; /* Borda verde para item selecionado */
+}
+
+.suggestions-list {
+  position: absolute;
+  top: 100%; /* Certifica-se de que as sugestões apareçam abaixo do input */
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 5px;
+}
+
+.suggestions-list div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-list div:hover {
+  background-color: #f0f0f0;
+}
+
+/* acho que aqui vai cagar tudo mas nao sei
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos para o pop-up */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: zoom 0.3s ease;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+form input[type="text"],
+foram input[type="number"],
+foram select {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.input-container-custom {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.input-container-custom label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.submit-button-custom {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.submit-button-custom:hover {
+  background-color: #218838;
+}
+
+.close-custom {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.close-custom:hover,
+.close-custom:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media (max-width: 825px) {
+  .back-button {
+    color: white;
+    position: fixed;
+    top: 5px;
+  }
+}

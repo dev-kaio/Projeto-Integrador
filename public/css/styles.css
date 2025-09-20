@@ -1,0 +1,275 @@
+/* estilos gerais para remover margens e definir a fonte padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* cores principais usadas no projeto */
+:root {
+  --primary-color: rgba(35, 179, 74); /* cor verde primária */
+  --secondary-color: rgba(0, 159, 227); /* cor azul secundária */
+  --text-color: #666666; /* cor do texto */
+}
+
+/* estilo para o corpo da página, centralizando o conteúdo */
+body {
+  display: flex; /* exibe o conteúdo como flexbox */
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center; /* centraliza verticalmente */
+  min-height: 100vh; /* altura mínima da página como toda a altura da janela */
+  background-color: #ffffff; /* cor de fundo branca */
+  margin: 0; /* remove margens */
+}
+
+/* estilo para o container de login */
+.login-container {
+  text-align: center; /* centraliza o texto */
+  width: 100%; /* largura responsiva */
+  max-width: 320px; /* largura máxima para telas maiores */
+  background-color: #ffffff; /* cor de fundo para visualização clara */
+  display: flex; /* usa flexbox */
+  flex-direction: column; /* organiza os elementos em coluna */
+  justify-content: center; /* centraliza o conteúdo verticalmente */
+  align-items: center; /* centraliza o conteúdo horizontalmente */
+  padding: 20px; /* espaçamento interno */
+  border-radius: 20px; /* borda arredondada */
+  box-shadow: 0px 0px 20px 20px rgb(0 0 0 / 15%); /* sombra para destacar o container */
+}
+
+/* estilo para o formulário de login */
+.login-form {
+  display: flex; /* exibe o conteúdo como flexbox */
+  flex-direction: column; /* organiza os elementos em coluna */
+  width: 100%; /* largura total do formulário */
+}
+
+/* estilo para os campos de entrada (usuário e senha) */
+.input-field {
+  width: 100%; /* largura total do campo */
+  padding: 10px; /* espaçamento interno */
+  margin-bottom: 15px; /* margem inferior */
+  border: 1px solid #d4c5bf; /* borda com cor cinza */
+  border-radius: 5px; /* borda arredondada */
+  font-size: 14px; /* tamanho da fonte */
+}
+
+/* estilo para o container do checkbox */
+.checkbox-container {
+  display: flex; /* exibe o conteúdo como flexbox */
+  align-items: center; /* alinha o conteúdo verticalmente */
+  margin-bottom: 20px; /* margem inferior */
+  margin-right: auto; /* margem lado direito */
+  font-size: 10px; /* tamanho da fonte */
+}
+
+/* adiciona espaço entre o checkbox e o texto */
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px; /* margem direita para adicionar espaço */
+}
+
+/* estilo para os botões de login e registro */
+.button-container {
+  display: flex; /* exibe o conteúdo como flexbox */
+  justify-content: space-between; /* espaça os botões */
+  gap: 10px; /* espaçamento entre os botões */
+  width: 100%; /* largura total do container */
+}
+
+/* estilo para os botões */
+.login-button {
+  flex: 1; /* faz com que os botões ocupem o mesmo espaço */
+  padding: 10px; /* espaçamento interno */
+  background-color: var(--primary-color); /* usa a cor primária */
+  color: white; /* cor do texto */
+  border: none; /* remove a borda padrão */
+  border-radius: 5px; /* borda arredondada */
+  cursor: pointer; /* altera o cursor para indicar clicável */
+  font-size: 14px; /* tamanho da fonte */
+  font-weight: bold; /* peso da fonte em negrito */
+  transition: background-color 0.3s; /* efeito de transição ao passar o mouse */
+  margin-top: 10px;
+}
+
+/* efeito ao passar o mouse nos botões */
+.login-button:hover {
+  background-color: var(--secondary-color); /* muda para a cor secundária */
+}
+
+/* esconder o botão de login anônimo */
+.hidden {
+  display: none;
+}
+
+/* rodapé da página */
+.rodape {
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Estilo para o container de entrada da senha */
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Estilo para o campo de entrada da senha */
+.password-container input[type="password"], .password-container input[type="text"] {
+  width: 100%;
+  padding-right: 40px; /* Espaço para o ícone do olho */
+  box-sizing: border-box; /* Inclui padding e borda no tamanho total do elemento */
+}
+
+/* Estilo para o ícone do olho personalizado */
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-80%);
+  cursor: pointer;
+  width: 24px; /* Largura da imagem */
+  height: 24px; /* Altura da imagem */
+  background-size: cover; /* Ajusta a imagem ao tamanho do contêiner */
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+}
+
+.toggle-password:hover {
+  opacity: 1;
+}
+
+/* Estilo para o .input-field para assegurar consistência */
+.input-field {
+  width: 100%; /* Largura total do campo */
+  padding: 10px; /* Espaçamento interno */
+  border: 1px solid #d4c5bf; /* Borda com cor cinza */
+  border-radius: 5px; /* Borda arredondada */
+  font-size: 14px; /* Tamanho da fonte */
+  box-sizing: border-box; /* Inclui padding e borda no tamanho total do elemento */
+}
+
+
+
+/* estilo para o container da tela principal */
+.main-container.hidden {
+  display: none; /* esconde o container inicialmente */
+  text-align: center; /* centraliza o conteúdo */
+  width: 100%; /* largura total */
+  padding: 20px; /* espaçamento interno */
+  position: relative;
+}
+
+/* estilo para o botão de voltar */
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  font-size: 50px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* estilo para o grid de ícones */
+.icon-grid {
+  display: flex; /* exibe o conteúdo como flexbox */
+  flex-direction: column; /* organiza os elementos em coluna */
+  align-items: center; /* centraliza os itens horizontalmente */
+  gap: 20px; /* espaçamento entre os itens */
+  margin-top: 60px; /* margem superior */
+}
+
+/* estilo para os botões superiores */
+.top-buttons {
+  display: flex; /* exibe o conteúdo como flexbox */
+  justify-content: center; /* centraliza os itens horizontalmente */
+  gap: 40px; /* espaçamento entre os itens */
+}
+
+/* estilo para cada ícone */
+.icon-item, .icon-item2 {
+  display: flex; /* exibe o conteúdo como flexbox */
+  flex-direction: column; /* organiza o ícone e texto em coluna */
+  align-items: center; /* centraliza os itens */
+  border: 2px solid var(--secondary-color); /* borda azul ao redor dos ícones */
+  border-radius: 10px; /* bordas arredondadas */
+  padding: 10px; /* espaçamento interno */
+  background-color: var(--primary-color); /* cor de fundo dos ícones */
+  width: 120px; /* largura dos ícones */
+  height: 120px; /* altura dos ícones */
+  position: relative; /* necessário para posicionar o texto */
+  cursor: pointer; /* indica que o elemento é clicável */
+  transition: background-color 0.3s; /* transição suave para a cor de fundo */
+  border: none; /* remove a borda padrão do botão */
+  margin-bottom: 30px; /* adiciona espaço abaixo do ícone */
+  box-shadow: 0px 0px 20px 7px rgb(34 80 159 / 52%)
+}
+
+/* estilo para o texto do ícone */
+.icon-label, .icon-label2 {
+  font-weight: bold;
+  font-size: 14px; /* tamanho da fonte do texto */
+  color: var(--text-color); /* cor do texto */
+  text-align: center; /* centraliza o texto */
+  margin-top: -20px; /* move o texto para cima */
+  margin-bottom: 10px; /* adiciona margem inferior */
+  position: absolute; /* posiciona o texto de forma absoluta */
+  top: -5px; /* ajusta a posição do texto acima do quadrado */
+}
+
+/* centraliza a imagem dentro do quadrado */
+.icon-item img, .icon-item2 img {
+  width: 70px; /* largura da imagem do ícone */
+  height: 70px; /* altura da imagem do ícone */
+  margin-top: auto; /* ajusta a margem superior para centralizar */
+  margin-bottom: auto; /* ajusta a margem inferior para centralizar */
+}
+
+/* efeito ao passar o mouse sobre o botão */
+.icon-item:hover, .icon-item2:hover {
+  background-color: var(--secondary-color); /* muda para a cor primária */
+}
+
+.menu {
+  display: flex; /* Usa flexbox para organizar os itens */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  align-items: center; /* Centraliza os itens verticalmente */
+  gap: 20px; /* Espaçamento entre os ícones */
+  padding: 20px; /* Espaçamento interno */
+  background-color: #f8e6de; /* Cor de fundo */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar o menu */
+}
+
+/* Estilo para os itens do menu */
+.menu-item {
+  display: flex; /* Usa flexbox para centralizar o ícone dentro do item */
+  justify-content: center; /* Centraliza o ícone horizontalmente */
+  align-items: center; /* Centraliza o ícone verticalmente */
+  width: 60px; /* Largura fixa para os itens */
+  height: 60px; /* Altura fixa para os itens */
+  background-color: var(--secondary-color); /* Cor de fundo dos itens */
+  border-radius: 50%; /* Ícones circulares */
+  transition: transform 0.3s; /* Transição suave para o efeito de hover */
+}
+
+/* Efeito ao passar o mouse sobre os itens do menu */
+.menu-item:hover {
+  transform: scale(1.1); /* Aumenta o tamanho do ícone */
+  background-color: var(--primary-color); /* Muda a cor de fundo */
+}
+
+/* Estilo para as imagens dos ícones */
+.menu-item img {
+  width: 30px; /* Largura dos ícones */
+  height: 30px; /* Altura dos ícones */
+}
