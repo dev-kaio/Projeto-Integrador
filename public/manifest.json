@@ -3,8 +3,8 @@
   "short_name": "ToolSave",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#10295a",
-  "theme_color": "#10295a",
+  "background_color": "rgba(35, 179, 74)",
+  "theme_color": "rgba(35, 179, 74)",
   "description": "Gerenciador de gasto de brocas",
   "icons": [
     {
