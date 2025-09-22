@@ -1,45 +1,58 @@
 #include <Arduino.h>
 #include <WiFi.h>
-#include <ESP32Encoder.h>
 #include <Firebase_ESP_Client.h>
 
-// ============ ENCODER ============
-ESP32Encoder encoder;
-const float mmPerPulse = 0.1;
-float compEncoder = 0;
-float ultimaMedicao = -1;
-
 // ============ CONFIG Wi-Fi ============
-const char *ssid = "";
-const char *password = "";
+const char *ssid = "K";
+const char *password = "kaiolito";
 
 // ============ CONFIG Firebase ============
 #define API_KEY "AIzaSyDYzKk18gri7x4_p3BfbI9kizYNuqJYYF4"
 #define DATABASE_URL "https://projeto-integrador-384cb-default-rtdb.firebaseio.com/"
 
-// ============ USUÁRIO AUTH ============
+// Usuário criado no Firebase Authentication
 #define USER_EMAIL "esp32@esp32.com"
 #define USER_PASSWORD "esp32auth"
 
-// ============ Objetos Firebase ============
+// Pinos usados
+#define PINO_D12 12 // rele 1 (Motor)
+#define PINO_D13 13 // rele 2 (Motor)
+#define PINO_D18 18 // fim de curso 1
+#define PINO_D19 19 // fim de curso 2
+#define PINO_D25 25 // lado 1 encoder
+#define PINO_D26 26 // lado 2 encoder
+
+// Objetos Firebase
 FirebaseData fbdo;
 FirebaseAuth auth;
 FirebaseConfig config;
 
 String selectedBrocaID = "";
+String estadoAtual = "";
+// Valor que virá da medição
+float compEncoder = 0;
 
 void setup()
 {
   Serial.begin(115200);
 
-  // ============ INICIA ENCODER ============
-  pinMode(18, INPUT_PULLUP);
-  pinMode(19, INPUT_PULLUP);
-  encoder.attachHalfQuad(18, 19);
-  encoder.clearCount();
-  Serial.println("Encoder iniciado!");
+  // Definindo tipo dos pinos (entrada/saída)
+  pinMode(PINO_D12, OUTPUT);
+  pinMode(PINO_D13, OUTPUT);
+  pinMode(PINO_D18, INPUT);
+  pinMode(PINO_D19, INPUT);
+  pinMode(PINO_D25, INPUT);
+  pinMode(PINO_D26, INPUT);
 
-  // ============ CONECTA Wi-Fi ============
+  // Desativando todos inicialmente
+  digitalWrite(PINO_D12, HIGH);
+  digitalWrite(PINO_D13, HIGH);
+  digitalWrite(PINO_D18, LOW);
+  digitalWrite(PINO_D19, LOW);
+  digitalWrite(PINO_D25, HIGH);
+  digitalWrite(PINO_D26, HIGH);
+
+  // Conectar ao Wi-Fi
   WiFi.begin(ssid, password);
   Serial.print("Conectando ao WiFi");
   while (WiFi.status() != WL_CONNECTED)
@@ -47,18 +60,22 @@ void setup()
     delay(500);
     Serial.print(".");
   }
-  Serial.println("\nWiFi conectado!");
+  Serial.println("\nConectado ao WiFi!");
 
-  // ============ CONFIGURA FIREBASE ============
+  // Autenticação Firebase
   auth.user.email = USER_EMAIL;
   auth.user.password = USER_PASSWORD;
+
+  // API Key e URL do banco
   config.api_key = API_KEY;
   config.database_url = DATABASE_URL;
+
+  // Inicia Firebase
   Firebase.begin(&config, &auth);
   Firebase.reconnectWiFi(true);
 
   // Espera autenticar
-  Serial.println("Autenticando Firebase...");
+  Serial.println("Autenticando...");
   while (auth.token.uid == "")
   {
     Serial.print(".");
@@ -67,81 +84,206 @@ void setup()
   Serial.println("\nAutenticado com sucesso!");
 }
 
-// ============ ENVIA DADOS PARA FIREBASE ============
 void adicionarNovoCompParaBroca(String id, float novoComp)
 {
   String caminho = "/Brocas/" + id;
 
   FirebaseJson json;
-  json.set("novoComp", novoComp);
+  json.set("novoComp", String(novoComp) + " mm");
 
   if (Firebase.RTDB.updateNode(&fbdo, caminho.c_str(), &json))
   {
-    Serial.println("Campo 'novoComp' atualizado com sucesso!");
+    Serial.println("Campo novoComp atualizado com sucesso!");
   }
   else
   {
-    Serial.print("Erro ao atualizar Firebase: ");
+    Serial.print("Erro ao atualizar novoComp: ");
+    Serial.println(fbdo.errorReason());
+  }
+}
+
+void alterarEstado(String estado)
+{
+  String caminho = "/EstadoMaquina/estadoAtual";
+
+  FirebaseJson json;
+  json.set("estado", estado);
+  // Arrumar timestamp
+  unsigned long timestamp = millis() / 1000;
+  json.set("atualizadoEm", (String)timestamp);
+  if (Firebase.RTDB.updateNode(&fbdo, caminho.c_str(), &json))
+  {
+    Serial.println("Estado Atual atualizado com sucesso!");
+  }
+  else
+  {
+    Serial.print("Erro ao atualizar Estado Atual: ");
     Serial.println(fbdo.errorReason());
   }
 }
 
 void loop()
 {
-  // Atualiza a distância atual do encoder
-  long count = encoder.getCount();
-  compEncoder = count * mmPerPulse;
-
-  Serial.printf("Contagem: %ld | Distância: %.2f mm\n", count, compEncoder);
-
-  // Tenta ler ID da broca selecionada
-  if (Firebase.RTDB.getString(&fbdo, "/BrocaSelecionadaID/id"))
+  if (Firebase.RTDB.get(&fbdo, "/EstadoMaquina/estadoAtual"))
   {
-    selectedBrocaID = fbdo.stringData();
-    Serial.print("ID da broca selecionada: ");
-    Serial.println(selectedBrocaID);
-
-    // Verifica se tem broca válida e distância mudou
-    if (selectedBrocaID != "0" && abs(compEncoder - ultimaMedicao) > 0.1)
+    if (fbdo.dataType() == "json")
     {
-      adicionarNovoCompParaBroca(selectedBrocaID, compEncoder);
-      ultimaMedicao = compEncoder;
+      FirebaseJson &json = fbdo.to<FirebaseJson>();
+      FirebaseJsonData jsonData;
+      json.get(jsonData, "estado");
+
+      estadoAtual = jsonData.to<String>();
+      Serial.print("Estado Atual: ");
+      Serial.println(estadoAtual);
+      Serial.print("Encoder: ");
+      Serial.println(compEncoder);
+
+      switch (estadoAtual.charAt(0))
+      {
+      case 'i': // estado "iniciando"
+                // Dar partida na máquina, esperar encoder medir
+        Serial.println("Iniciando máquina...");
+
+        digitalWrite(PINO_D12, LOW);
+        Serial.println(digitalRead(PINO_D18)); // Algo está travando
+        if (digitalRead(PINO_D18) == HIGH)
+        {
+          Serial.println("Parando Máquina");
+          digitalWrite(PINO_D12, HIGH);
+          delay(2000);
+          alterarEstado("parado");
+        }
+        break;
+
+      case 'p': // estado "parado"
+        // salvar medicao no banco
+        Serial.println("Máquina parada. Salvando medição...");
+        if (Firebase.RTDB.getString(&fbdo, "/BrocaSelecionadaID/id"))
+        {
+          selectedBrocaID = fbdo.stringData();
+          Serial.print("ID da broca selecionada: ");
+          Serial.println(selectedBrocaID);
+
+          if (!selectedBrocaID.equals("0"))
+          {
+            adicionarNovoCompParaBroca(selectedBrocaID, compEncoder);
+            delay(2000);
+            alterarEstado("f");
+          }
+        }
+        else
+        {
+          Serial.print("Erro ao ler ID da broca: ");
+          Serial.println(fbdo.errorReason());
+        }
+        break;
+
+      //case 'c': // estado "concluido"
+        // retornar medidor
+        // ou fc2 ou delay
+        // Serial.println("Retornando máquina...");
+
+        // digitalWrite(PINO_D13, LOW);
+
+        // if (digitalRead(PINO_D19) == HIGH)
+        // {
+        //   Serial.println("Parando Máquina");
+        //   digitalWrite(PINO_D13, HIGH);
+        //   delay(2000);
+        //   alterarEstado("finalizado");
+        // }
+        // break;
+
+      case 'f': // estado "finalizado"
+        Serial.println("Processo finalizado. Aguardando nova ordem...");
+        delay(3000);
+        break;
+
+      default:
+        Serial.println("Estado não reconhecido.");
+        delay(1000);
+        break;
+      }
+    }
+    else
+    {
+      Serial.println("Esperado JSON, mas não veio como JSON.");
     }
   }
   else
   {
-    Serial.print("Erro ao ler broca selecionada: ");
+    Serial.print("Erro ao obter estadoAtual: ");
     Serial.println(fbdo.errorReason());
   }
-
-  delay(5000); // Espera 2s antes da próxima verificação
+  delay(500);
 }
+// Botao de reinício no site
 
-// ===================== TESTE DOS RELÉS
-// const int reles[] = {18, 19, 21, 22};
-// const int num_reles = sizeof(reles) / sizeof(reles[0]);
 
-// void setup() {
-//   for (int i = 0; i < num_reles; i++) {
-//     pinMode(reles[i], OUTPUT);
-//     digitalWrite(reles[i], HIGH);
+
+
+
+// void loop()
+// {
+//   if (Firebase.RTDB.get(&fbdo, "/EstadoMaquina/estadoAtual"))
+//   {
+//     if (fbdo.dataType() == "json")
+//     {
+//       FirebaseJson &json = fbdo.to<FirebaseJson>();
+//       FirebaseJsonData jsonData;
+//       json.get(jsonData, "estado");
+
+//       estadoAtual = jsonData.to<String>();
+//       Serial.print("Estado Atual: ");
+//       Serial.println(estadoAtual);
+//       Serial.print("Encoder:");
+//       Serial.println(compEncoder);
+
+//       if (estadoAtual.equals("iniciando"))
+//       {
+//         // Dar partida na máquina, esperar encoder medir
+
+//         // if (medidor alcancar broca) -> fc1
+//         alterarEstado("parado");
+//       }
+
+//       else if (estadoAtual.equals("parado"))
+//       {
+//         // salvar medicao no banco
+//         if (Firebase.RTDB.getString(&fbdo, "/BrocaSelecionadaID/id"))
+//         {
+//           selectedBrocaID = fbdo.stringData();
+//           Serial.print("ID da broca selecionada: ");
+//           Serial.println(selectedBrocaID);
+
+//           if (!selectedBrocaID.equals("0"))
+//           {
+//             adicionarNovoCompParaBroca(selectedBrocaID, compEncoder);
+//             alterarEstado("concluido");
+//           }
+//         }
+//         else
+//         {
+//           Serial.print("Erro ao ler: ");
+//           Serial.println(fbdo.errorReason());
+//         }
+//       }
+//       else if (estadoAtual.equals("concluido"))
+//       {
+//         // retornar medidor
+//         //ou fc2 ou delay
+//         alterarEstado("finalizado");
+//       }
+//     }
+//     else
+//     {
+//       Serial.println("Esperado JSON, mas não veio como JSON.");
+//     }
 //   }
-
-//   Serial.begin(115200);
-//   Serial.println("Iniciando teste de relés...");
-// }
-
-// void loop() {
-//   for (int i = 0; i < num_reles; i++) {
-//     Serial.printf("Ligando relé na porta D%d\n", reles[i]);
-//     digitalWrite(reles[i], LOW);
-//     delay(1000);
-
-//     Serial.printf("Desligando relé na porta D%d\n", reles[i]);
-//     digitalWrite(reles[i], HIGH);
-//     delay(500);
+//   else
+//   {
+//     Serial.print("Erro ao obter estadoAtual: ");
+//     Serial.println(fbdo.errorReason());
 //   }
-
-//   Serial.println("Ciclo completo. Repetindo em 2 segundos...\n");
-//   delay(2000);
+//   delay(1000);
 // }
