@@ -39,8 +39,8 @@ void setup()
   // Definindo tipo dos pinos (entrada/saída)
   pinMode(PINO_D12, OUTPUT);
   pinMode(PINO_D13, OUTPUT);
-  pinMode(PINO_D18, INPUT);
-  pinMode(PINO_D19, INPUT);
+  pinMode(PINO_D18, INPUT_PULLDOWN);
+  pinMode(PINO_D19, INPUT_PULLDOWN);
   pinMode(PINO_D25, INPUT);
   pinMode(PINO_D26, INPUT);
 
@@ -148,8 +148,8 @@ void loop()
         Serial.println(digitalRead(PINO_D18)); // Algo está travando
         if (digitalRead(PINO_D18) == HIGH)
         {
-          Serial.println("Parando Máquina");
           digitalWrite(PINO_D12, HIGH);
+          Serial.println("Parando Máquina");
           delay(2000);
           alterarEstado("parado");
         }
@@ -168,7 +168,7 @@ void loop()
           {
             adicionarNovoCompParaBroca(selectedBrocaID, compEncoder);
             delay(2000);
-            alterarEstado("f");
+            alterarEstado("c");
           }
         }
         else
@@ -178,21 +178,21 @@ void loop()
         }
         break;
 
-      //case 'c': // estado "concluido"
+      case 'c': // estado "concluido"
         // retornar medidor
         // ou fc2 ou delay
-        // Serial.println("Retornando máquina...");
+        Serial.println("Retornando máquina...");
 
-        // digitalWrite(PINO_D13, LOW);
+        digitalWrite(PINO_D13, LOW);
 
-        // if (digitalRead(PINO_D19) == HIGH)
-        // {
-        //   Serial.println("Parando Máquina");
-        //   digitalWrite(PINO_D13, HIGH);
-        //   delay(2000);
-        //   alterarEstado("finalizado");
-        // }
-        // break;
+        if (digitalRead(PINO_D19) == HIGH)
+        {
+          Serial.println("Parando Máquina");
+          digitalWrite(PINO_D13, HIGH);
+          delay(2000);
+          alterarEstado("finalizado");
+        }
+        break;
 
       case 'f': // estado "finalizado"
         Serial.println("Processo finalizado. Aguardando nova ordem...");
@@ -218,10 +218,6 @@ void loop()
   delay(500);
 }
 // Botao de reinício no site
-
-
-
-
 
 // void loop()
 // {
