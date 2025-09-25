@@ -171,5 +171,5 @@ async function esperarEstadoEsperado(estadoEsperado, intervalo = 500) {
 }
 
 //Criar botao para recomeçar processo e alterar estado para reiniciando
-
+document.getElementById("reiniciarBtn").addEventListener("click", alterarEstado("reiniciando"));
 //As fotos vão sobescrever as antigas na forma atual
