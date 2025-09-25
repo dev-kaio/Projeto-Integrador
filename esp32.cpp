@@ -167,7 +167,7 @@ void loop()
           if (!selectedBrocaID.equals("0"))
           {
             adicionarNovoCompParaBroca(selectedBrocaID, compEncoder);
-            delay(2000);
+            delay(1000);
             alterarEstado("c");
           }
         }
@@ -187,9 +187,9 @@ void loop()
 
         if (digitalRead(PINO_D19) == HIGH)
         {
-          Serial.println("Parando Máquina");
           digitalWrite(PINO_D13, HIGH);
-          delay(2000);
+          Serial.println("Parando Máquina");
+          delay(1000);
           alterarEstado("finalizado");
         }
         break;
@@ -198,6 +198,18 @@ void loop()
         Serial.println("Processo finalizado. Aguardando nova ordem...");
         delay(3000);
         break;
+
+      case "r":
+        Serial.println("Reiniciando máquina.");
+        digitalWrite(PINO_D13, LOW);
+
+        if (digitalRead(PINO_D19) == HIGH)
+        {
+          digitalWrite(PINO_D13, HIGH);
+          Serial.println("Parando Máquina");
+          delay(1000);
+          alterarEstado("finalizado");
+        }
 
       default:
         Serial.println("Estado não reconhecido.");
@@ -217,69 +229,3 @@ void loop()
   }
   delay(500);
 }
-// Botao de reinício no site
-
-// void loop()
-// {
-//   if (Firebase.RTDB.get(&fbdo, "/EstadoMaquina/estadoAtual"))
-//   {
-//     if (fbdo.dataType() == "json")
-//     {
-//       FirebaseJson &json = fbdo.to<FirebaseJson>();
-//       FirebaseJsonData jsonData;
-//       json.get(jsonData, "estado");
-
-//       estadoAtual = jsonData.to<String>();
-//       Serial.print("Estado Atual: ");
-//       Serial.println(estadoAtual);
-//       Serial.print("Encoder:");
-//       Serial.println(compEncoder);
-
-//       if (estadoAtual.equals("iniciando"))
-//       {
-//         // Dar partida na máquina, esperar encoder medir
-
-//         // if (medidor alcancar broca) -> fc1
-//         alterarEstado("parado");
-//       }
-
-//       else if (estadoAtual.equals("parado"))
-//       {
-//         // salvar medicao no banco
-//         if (Firebase.RTDB.getString(&fbdo, "/BrocaSelecionadaID/id"))
-//         {
-//           selectedBrocaID = fbdo.stringData();
-//           Serial.print("ID da broca selecionada: ");
-//           Serial.println(selectedBrocaID);
-
-//           if (!selectedBrocaID.equals("0"))
-//           {
-//             adicionarNovoCompParaBroca(selectedBrocaID, compEncoder);
-//             alterarEstado("concluido");
-//           }
-//         }
-//         else
-//         {
-//           Serial.print("Erro ao ler: ");
-//           Serial.println(fbdo.errorReason());
-//         }
-//       }
-//       else if (estadoAtual.equals("concluido"))
-//       {
-//         // retornar medidor
-//         //ou fc2 ou delay
-//         alterarEstado("finalizado");
-//       }
-//     }
-//     else
-//     {
-//       Serial.println("Esperado JSON, mas não veio como JSON.");
-//     }
-//   }
-//   else
-//   {
-//     Serial.print("Erro ao obter estadoAtual: ");
-//     Serial.println(fbdo.errorReason());
-//   }
-//   delay(1000);
-// }
