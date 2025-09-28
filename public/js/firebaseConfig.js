@@ -1,6 +1,6 @@
 import { getDatabase } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import { signOut as firebaseSignOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -27,25 +27,38 @@ async function signOut() {
   }
 }
 
+
+function waitForUser() {
+  return new Promise((resolve, reject) => {
+    const user = auth.currentUser;
+    if (user) return resolve(user); // usuário já disponível
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      unsubscribe();
+      if (user) resolve(user);
+      else reject(new Error("Usuário não autenticado"));
+    });
+  });
+}
+
 async function apiFetch(url, options = {}) {
-  const token = localStorage.getItem("token");
-
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-    ...options.headers,
-  };
-
-  if (options.body instanceof FormData) {
-    delete headers["Content-Type"];
-  }
-
   try {
+    const user = await waitForUser();
+    const token = await user.getIdToken();
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      ...options.headers,
+    };
+
+    if (options.body instanceof FormData) {
+      delete headers["Content-Type"];
+    }
+
     const res = await fetch(url, { ...options, headers });
 
     if (!res.ok) {
       const errorMsg = await res.text();
-      console.error(`Erro na API (${res.status}):`, errorMsg);
       throw new Error(`Erro ${res.status}: ${errorMsg}`);
     }
 
