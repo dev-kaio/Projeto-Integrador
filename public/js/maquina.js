@@ -111,7 +111,7 @@ document.getElementById("tirarFotoBtn").addEventListener("click", async () => {
     carregarDetalhesDaBroca();
     document.getElementById("atualizacao").textContent =
       "Medidas atualizadas.";
-  }, 3000);
+  }, 35000);
 });
 
 document.getElementById("check-button").addEventListener("click", FuncaoCheck);
@@ -124,8 +124,8 @@ async function FuncaoCheck() {
     //Tira foto após concluir processo
     await tirarFoto("fim");
 
-    //Concluindo processo na maquina para voltar ao estado inicial
-    await alterarEstado("concluido");
+    //Concluindo processo na maquina
+    await alterarEstado("finalizado");
 
     if (data) {
       window.location.href = "./brocas.html";
