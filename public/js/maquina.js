@@ -111,7 +111,7 @@ document.getElementById("tirarFotoBtn").addEventListener("click", async () => {
     carregarDetalhesDaBroca();
     document.getElementById("atualizacao").textContent =
       "Medidas atualizadas.";
-  }, 35000);
+  }, 45000);
 });
 
 document.getElementById("check-button").addEventListener("click", FuncaoCheck);
